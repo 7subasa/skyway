@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Timer</title>
-    <link rel="stylesheet" href="css/main.css" />
+    <title>SkyWay 技術調査</title>
   </head>
   <body>
-    <div class="container">
-      <p>現在時刻</p>
-      <div id="current-time"></div>
-
-      <p>timer</p>
-      <div id="timer">0</div>
-      <button onclick="startTimer()">Start</button>
-      <button onclick="stopTimer()">Stop</button>
-      <button onclick="resetTimer()">Reset</button>
+    <p>ID: <span id="my-id"></span></p>
+    <div>
+      room name: <input id="room-name" type="text" />
+      <button id="join">join</button>
     </div>
-    <script src="js/timer.js"></script>
+    <video id="local-video" width="400px" muted playsinline></video>
+    <div id="button-area"></div>
+    <div id="remote-media-area"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@skyway-sdk/room/dist/skyway_room-latest.js"></script>
+    <script type="module" src="js/skyway.js"></script>
   </body>
 </html>
