@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SkyWay 技術調査</title>
-  </head>
-  <body>
-    <p>ID: <span id="my-id"></span></p>
-    <div>
-      room name: <input id="room-name" type="text" />
-      <button id="join">join</button>
-    </div>
-    <video id="local-video" width="400px" muted playsinline></video>
-    <div id="button-area"></div>
-    <div id="remote-media-area"></div>
-    <script src="https://cdn.jsdelivr.net/npm/@skyway-sdk/room/dist/skyway_room-latest.js"></script>
-    <script type="module" src="js/skyway.js"></script>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/javascript">
+        const app = document.getElementById('app');
+
+        const header = document.createElement('h1');
+
+        const text = 'Develop. Preview. Ship';
+        const headerContent = document.createTextNode(text);
+
+        header.appendChild(headerContent);
+
+        app.appendChild(header);
+        
+    </script>
+</body>
 </html>

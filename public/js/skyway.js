@@ -1,4 +1,11 @@
-const { nowInSec, SkyWayAuthToken, SkyWayContext, SkyWayRoom, SkyWayStreamFactory, uuidV4 } = skyway_room;
+const {
+  nowInSec,
+  SkyWayAuthToken,
+  SkyWayContext,
+  SkyWayRoom,
+  SkyWayStreamFactory,
+  uuidV4,
+} = skyway_room;
 
 const token = new SkyWayAuthToken({
   jti: uuidV4(),
@@ -6,33 +13,33 @@ const token = new SkyWayAuthToken({
   exp: nowInSec() + 60 * 60 * 24,
   scope: {
     app: {
-      id: 'a2b2c06f-e0d3-4503-b55b-338ef326509b',
+      id: "a2b2c06f-e0d3-4503-b55b-338ef326509b",
       turn: true,
-      actions: ['read'],
+      actions: ["read"],
       channels: [
         {
-          id: '*',
-          name: '*',
-          actions: ['write'],
+          id: "*",
+          name: "*",
+          actions: ["write"],
           members: [
             {
-              id: '*',
-              name: '*',
-              actions: ['write'],
+              id: "*",
+              name: "*",
+              actions: ["write"],
               publication: {
-                actions: ['write'],
+                actions: ["write"],
               },
               subscription: {
-                actions: ['write'],
+                actions: ["write"],
               },
             },
           ],
           sfuBots: [
             {
-              actions: ['write'],
+              actions: ["write"],
               forwardings: [
                 {
-                  actions: ['write'],
+                  actions: ["write"],
                 },
               ],
             },
@@ -41,16 +48,24 @@ const token = new SkyWayAuthToken({
       ],
     },
   },
-}).encode('vhJTg00u+YT/zkr80CBFVJUyNevpn7FCfuxEaGWu3EA=');
+}).encode("vhJTg00u+YT/zkr80CBFVJUyNevpn7FCfuxEaGWu3EA=");
 
 (async () => {
-  const localVideo = document.getElementById('local-video');
-  const buttonArea = document.getElementById('button-area');
-  const remoteMediaArea = document.getElementById('remote-media-area');
-  const roomNameInput = document.getElementById('room-name');
+  const localVideo = document.getElementById("local-video");
+  const localDisp = document.getElementById("local-disp");
+  const buttonArea = document.getElementById("button-area");
+  const remoteMediaArea = document.getElementById("remote-media-area");
+  const roomNameInput = document.getElementById("room-name");
+  // 画面共有
+//   const dispStream = await navigator.mediaDevices.getDisplayMedia({
+//     video: true,
+//   });
+//   let dispVideo = dispStream.getVideoTracks();
+//   dispVideo.attach(localDisp);
+//   await dispVideo.play();
 
-  const myId = document.getElementById('my-id');
-  const joinButton = document.getElementById('join');
+  const myId = document.getElementById("my-id");
+  const joinButton = document.getElementById("join");
 
   const { audio, video } =
     await SkyWayStreamFactory.createMicrophoneAudioAndCameraStream();
@@ -58,11 +73,11 @@ const token = new SkyWayAuthToken({
   await localVideo.play();
 
   joinButton.onclick = async () => {
-    if (roomNameInput.value === '') return;
+    if (roomNameInput.value === "") return;
 
     const context = await SkyWayContext.Create(token);
     const room = await SkyWayRoom.FindOrCreate(context, {
-      type: 'p2p',
+      type: "p2p",
       name: roomNameInput.value,
     });
     const me = await room.join();
@@ -75,7 +90,7 @@ const token = new SkyWayAuthToken({
     const subscribeAndAttach = (publication) => {
       if (publication.publisher.id === me.id) return;
 
-      const subscribeButton = document.createElement('button');
+      const subscribeButton = document.createElement("button");
       subscribeButton.textContent = `${publication.publisher.id}: ${publication.contentType}`;
       buttonArea.appendChild(subscribeButton);
 
@@ -84,13 +99,13 @@ const token = new SkyWayAuthToken({
 
         let newMedia;
         switch (stream.track.kind) {
-          case 'video':
-            newMedia = document.createElement('video');
+          case "video":
+            newMedia = document.createElement("video");
             newMedia.playsInline = true;
             newMedia.autoplay = true;
             break;
-          case 'audio':
-            newMedia = document.createElement('audio');
+          case "audio":
+            newMedia = document.createElement("audio");
             newMedia.controls = true;
             newMedia.autoplay = true;
             break;
