@@ -13,19 +13,27 @@
     <script type="text/jsx">
         const app = document.getElementById('app');
 
-        function Header() {
-            return (<h1>Develop. Preview. Ship.</h1>)
+        function Header({title}) {
+            return <h1>{title ? title : 'Default Title'}</h1>
         }
 
         function HomePage() {
+            const names = ['Apple', 'Banana'];
             return (
                 <div> 
-                    <Header /> 
+                    <Header title='' /> 
+                    <Header title='React' /> 
+                    <Header title='Demo Title' /> 
+                    <ul>
+                        {names.map((name) => (
+                            <li key={name}>{name}</li>
+                        ))}
+                    </ul>
                 </div>
-            )
+            );
         }
 
-        ReactDOM.render(<HomePage/>, app)
+        ReactDOM.render(<HomePage/>, app);
     </script>
 </body>
 </html>
